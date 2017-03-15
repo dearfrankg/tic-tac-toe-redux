@@ -1,8 +1,12 @@
-import './index.css'
-
 import React from 'react'
 import {render} from 'react-dom'
-
+import { Provider } from 'react-redux'
 import App from './App'
+import game from './store'
 
-render(<App/>, document.querySelector('#app'))
+render(
+  <Provider store={game}>
+    <App/>
+  </Provider>,
+  document.querySelector('#app')
+)
