@@ -4,11 +4,11 @@
 [![Coveralls][coveralls-badge]][coveralls]
 
 
-[build-badge]: https://img.shields.io/travis/dearfrankg/react-odometer/master.png?style=flat-square
-[build]: https://travis-ci.org/dearfrankg/react-odometer
+[build-badge]: https://img.shields.io/travis/dearfrankg/tic-tac-toe-redux/master.png?style=flat-square
+[build]: https://travis-ci.org/dearfrankg/tic-tac-toe-redux
 
-[coveralls-badge]: https://img.shields.io/coveralls/dearfrankg/react-odometer/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/dearfrankg/react-odometer
+[coveralls-badge]: https://img.shields.io/coveralls/dearfrankg/tic-tac-toe-redux/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/dearfrankg/tic-tac-toe-redux
 
 
 ## Getting started
