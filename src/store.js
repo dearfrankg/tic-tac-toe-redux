@@ -15,7 +15,9 @@ const initialState = {
 }
 
 export const gameReducer = handleActions({
-  ['reset-game']: (state, action) => initialState,
+  ['reset-game']: (state, action) => {
+    return initialState
+  },
 
 
   ['handle-move']: (state, action) => {

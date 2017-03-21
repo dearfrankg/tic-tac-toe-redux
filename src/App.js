@@ -16,9 +16,15 @@ class GameBoard extends React.Component {
   render = () => {
     const { game, actions, classes } = this.props
     return (
-      <Flex className={[classes.gameBoard, 'gameBoard'].join(' ')} style={{boxSizing: 'unset'}} align='flex-start' wrap >
+      <Flex 
+        data-spec='game-board' 
+        className={classes.gameBoard} 
+        style={{boxSizing: 'unset'}} 
+        align='flex-start' 
+        wrap 
+      >
         { game.cells.map((cell, i) =>
-          <div key={i} onClick={() => actions.handleMove(i)} >
+          <div key={i} onClick={() => actions.handleMove(i)} data-spec='box' >
             <Flex className={classes.box} align='center' justify='center' >
               <span>{cell}</span>
             </Flex>
@@ -55,8 +61,8 @@ export default class App extends React.Component {
         <GameBoard game={game} actions={actions} />
 
         <footer style={{textAlign: 'center'}}>
-          <h2>{game.winner && `Player ${game.winner} wins!!`}</h2>
-          <button onClick={actions.resetGame}>New Game</button>
+          <h2 data-spec='winner' >{game.winner && `Player ${game.winner} wins!!`}</h2>
+          <button data-spec='reset-game' onClick={actions.resetGame}>New Game</button>
         </footer>
       </div>
     )
