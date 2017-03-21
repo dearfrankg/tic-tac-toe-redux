@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './store'
 
-
 @injectSheet(styles())
 class GameBoard extends React.Component {
   static propTypes = {

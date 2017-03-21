@@ -3,10 +3,15 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import { shallow, mount } from 'enzyme'
 import { getSpecWrapper } from '../utils/unit'
-import 'jest-enzyme';
-
-import game from '../store'
 import App, { GameBoard } from '../App'
+import game from '../store'
+import * as actions from '../store'
+
+const setup = (element) => {
+    game.dispatch(actions.resetGame())
+    const wrapper = mount(<Provider store={game} ><App /></Provider>)
+    return wrapper
+}
 
 const clickSequence = (wrapper, sequence) => {
   sequence.forEach(square =>
@@ -16,7 +21,7 @@ const clickSequence = (wrapper, sequence) => {
 
 describe('tic-tac-toe', () => {
   describe('render', () => {
-    it('should render at target div', () => {
+    it('should render app', () => {
       render(
         <Provider store={game} >
           <App />
@@ -28,8 +33,7 @@ describe('tic-tac-toe', () => {
 
   describe('the first move', () => {
     it('should render X', () => {
-      const wrapper = mount(<Provider store={game} ><App /></Provider>)
-      getSpecWrapper(wrapper, 'reset-game').simulate('click')
+      const wrapper = setup()
       clickSequence(wrapper, [0])
       const actual = getSpecWrapper(wrapper, 'game-board').text()
       const expected = 'X'
@@ -39,8 +43,7 @@ describe('tic-tac-toe', () => {
 
   describe('multiple moves', () => {
     it('should alternate between player X and O', () => {
-      const wrapper = mount(<Provider store={game} ><App /></Provider>)
-      getSpecWrapper(wrapper, 'reset-game').simulate('click')
+      const wrapper = setup()
       clickSequence(wrapper, [0,1,2,3])
       const actual = getSpecWrapper(wrapper, 'game-board').text()
       const expected = 'XOXO'
@@ -49,18 +52,16 @@ describe('tic-tac-toe', () => {
   })
 
   describe('winning the game', () => {
-    it('should be possible for player X', () => {
-      const wrapper = mount(<Provider store={game} ><App /></Provider>)
-      getSpecWrapper(wrapper, 'reset-game').simulate('click')
+    it('should win with winning combo for Player X', () => {
+      const wrapper = setup()
       clickSequence(wrapper, [0,3,1,4,2])
       const actual = getSpecWrapper(wrapper, 'winner').text()
       const expected = 'Player X wins!!'
       expect(actual).toBe(expected)
     })
 
-    it('should be possible for player O', () => {
-      const wrapper = mount(<Provider store={game} ><App /></Provider>)
-      getSpecWrapper(wrapper, 'reset-game').simulate('click')
+    it('should win with winning combo for Player O', () => {
+      const wrapper = setup()
       clickSequence(wrapper, [0,3,1,4,8,5])
       const actual = getSpecWrapper(wrapper, 'winner').text()
       const expected = 'Player O wins!!'
@@ -68,13 +69,12 @@ describe('tic-tac-toe', () => {
     })
   })
 
-  describe('game reset', () => {
+  describe('new game button', () => {
     it('should clear board and winner', () => {
-      const wrapper = mount(<Provider store={game} ><App /></Provider>)
-      getSpecWrapper(wrapper, 'reset-game').simulate('click')
+      const wrapper = setup()
       clickSequence(wrapper, [0,3,1,4,2])
-      const hasWinnerBeingPlayerX = getSpecWrapper(wrapper, 'winner').text() === 'Player X wins!!'
-      expect(hasWinnerBeingPlayerX).toBe(true)
+      const hasWinnerAsPlayerX = getSpecWrapper(wrapper, 'winner').text() === 'Player X wins!!'
+      expect(hasWinnerAsPlayerX).toBe(true)
 
       getSpecWrapper(wrapper, 'reset-game').simulate('click')
 
