@@ -4,6 +4,7 @@
   "description": "Describe tic-tac-toe-redux here",
   "private": true,
   "jest": {
+    "coveragePathIgnorePatterns": ["./src/utils/unit.js"],
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     }
